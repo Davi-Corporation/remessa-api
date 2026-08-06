@@ -1,4 +1,8 @@
 package com.api.remessa.exception;
 
-public class InsufficientBalanceException {
+public class InsufficientBalanceException extends BusinessException {
+
+    public InsufficientBalanceException(String message) {
+        super(message);
+    }
 }
