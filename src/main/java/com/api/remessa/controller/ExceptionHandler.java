@@ -1,6 +1,6 @@
 package com.api.remessa.controller;
 
-import com.api.remessa.exception.InsufficientBalanceException;
+
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice

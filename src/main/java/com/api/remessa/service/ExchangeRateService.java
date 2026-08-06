@@ -14,4 +14,7 @@ public class ExchangeRateService {
         // For example, you can use a REST client to call an external service and retrieve the exchange rate
         return null; // Replace with actual implementation
     }
+
+    public void updateTodayQuotation() {
+    }
 }

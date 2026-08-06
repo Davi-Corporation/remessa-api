@@ -14,3 +14,11 @@ spring:
 
   flyway:
     enabled: true
+
+bcb:
+  ptax:
+    base-url: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata
+
+exchange-rate:
+  scheduler:
+    cron: "0 5 18 * * MON-FRI"
