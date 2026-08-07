@@ -21,4 +21,4 @@ bcb:
 
 exchange-rate:
   scheduler:
-    cron: "0 5 18 * * MON-FRI"
+    cron: "0 0 * * * *"

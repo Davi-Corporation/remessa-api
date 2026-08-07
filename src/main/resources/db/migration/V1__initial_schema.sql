@@ -20,9 +20,8 @@ CREATE TABLE wallet (
 
 CREATE TABLE exchange_rates (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                quotation_date DATE NOT NULL UNIQUE,
-                                buy_rate DECIMAL(10,4) NOT NULL,
-                                created_at DATETIME NOT NULL
+                                quotation_date_time DATETIME NOT NULL,
+                                buy_rate DECIMAL(10,4) NOT NULL
 );
 
 CREATE TABLE transfers (

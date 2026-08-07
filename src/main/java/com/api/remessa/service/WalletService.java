@@ -2,12 +2,15 @@ package com.api.remessa.service;
 
 import com.api.remessa.dto.request.UpdateWalletRequest;
 import com.api.remessa.dto.response.WalletResponse;
+import com.api.remessa.exception.BusinessException;
 import com.api.remessa.exception.ResourceNotFoundException;
 import com.api.remessa.model.Wallet;
 import com.api.remessa.persistence.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +40,18 @@ public class WalletService {
         return toResponse(wallet);
     }
 
-    private Wallet findWallet(Long userId) {
+    public void debit(Wallet wallet, BigDecimal amount) {
+        if (wallet.getBalanceBrl().compareTo(amount) < 0) {
+            throw new BusinessException("Insufficient balance");
+        }
+        wallet.setBalanceBrl(wallet.getBalanceBrl().subtract(amount));
+    }
+
+    public void credit(Wallet wallet, BigDecimal amount) {
+        wallet.setBalanceBrl(wallet.getBalanceBrl().add(amount));
+    }
+
+    public Wallet findWallet(Long userId) {
         return walletRepository.findByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Wallet not found"));
     }

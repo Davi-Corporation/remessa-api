@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Service
@@ -17,8 +17,10 @@ public class BcbExchangeRateClient {
 
     private final RestClient restClient;
 
-    public ExchangeRate getLatestExchangeRate(LocalDate date) {
 
+    public ExchangeRate getLatestExchangeRate() {
+
+        LocalDateTime date = LocalDateTime.now();
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
 
         ExchangeRateApiResponse response = restClient
@@ -33,13 +35,13 @@ public class BcbExchangeRateClient {
                 .body(ExchangeRateApiResponse.class);
 
         if (response == null || response.value().isEmpty()) {
-            throw new BusinessException("No exchange rate found for " + date);
+            throw new BusinessException("No exchange rate found for " + formattedDate);
         }
 
         ExchangeRateData data = response.value().getFirst();
 
         ExchangeRate exchangeRate = new ExchangeRate();
-        exchangeRate.setQuotationDate(date);
+        exchangeRate.setQuotationDateTime(data.dataHoraCotacao());
         exchangeRate.setBuyRate(data.cotacaoCompra());
 
         return exchangeRate;
