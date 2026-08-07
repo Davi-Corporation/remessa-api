@@ -16,5 +16,6 @@ public class ExchangeRateService {
     }
 
     public void updateTodayQuotation() {
+
     }
 }
