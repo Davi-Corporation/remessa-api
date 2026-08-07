@@ -40,14 +40,14 @@ public class WalletService {
         return toResponse(wallet);
     }
 
-    public void debit(Wallet wallet, BigDecimal amount) {
+    public void debitBrl(Wallet wallet, BigDecimal amount) {
         if (wallet.getBalanceBrl().compareTo(amount) < 0) {
             throw new BusinessException("Insufficient balance");
         }
         wallet.setBalanceBrl(wallet.getBalanceBrl().subtract(amount));
     }
 
-    public void credit(Wallet wallet, BigDecimal amount) {
+    public void creditUsd(Wallet wallet, BigDecimal amount) {
         wallet.setBalanceBrl(wallet.getBalanceBrl().add(amount));
     }
 
