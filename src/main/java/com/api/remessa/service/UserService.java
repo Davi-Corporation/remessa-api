@@ -41,7 +41,7 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         Wallet wallet = new Wallet();
-        wallet.setUserId(savedUser);
+        wallet.setUser(savedUser);
         wallet.setBalanceBrl(BigDecimal.ZERO);
         wallet.setBalanceUsd(BigDecimal.ZERO);
 
