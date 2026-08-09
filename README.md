@@ -141,10 +141,14 @@ http://localhost:8080/v3/api-docs
 
 ```http
 POST /users
-GET /users
 ```
 
 Cria um usuário e sua carteira.
+
+```http
+GET /users
+```
+Retorna a lista de usuários cadastrados.
 
 ### Carteiras
 
