@@ -23,6 +23,7 @@ public class TransferService {
     private final UserService userService;
     private final WalletService walletService;
     private final ExchangeRateService exchangeRateService;
+    private final TransferValidator transferValidator;
 
     @Transactional
     public TransferResponse transfer(CreateTransferRequest request) {
@@ -33,6 +34,8 @@ public class TransferService {
         if (sender.getId().equals(receiver.getId())) {
             throw new DuplicateResourceException("Sender and receiver cannot be the same");
         }
+
+        transferValidator.validateDailyLimit(sender,request.amountBrl());
 
         Wallet senderWallet = walletService.findWallet(sender.getId());
         Wallet receiverWallet = walletService.findWallet(receiver.getId());

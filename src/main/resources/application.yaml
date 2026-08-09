@@ -22,3 +22,8 @@ bcb:
 exchange-rate:
   scheduler:
     cron: "0 0 * * * *"
+
+transfer:
+  limits:
+    pf: 10000.00
+    pj: 50000.00
