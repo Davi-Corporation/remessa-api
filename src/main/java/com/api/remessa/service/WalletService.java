@@ -2,7 +2,7 @@ package com.api.remessa.service;
 
 import com.api.remessa.dto.request.UpdateWalletRequest;
 import com.api.remessa.dto.response.WalletResponse;
-import com.api.remessa.exception.BusinessException;
+import com.api.remessa.exception.InsufficientBalanceException;
 import com.api.remessa.exception.ResourceNotFoundException;
 import com.api.remessa.model.Wallet;
 import com.api.remessa.persistence.WalletRepository;
@@ -42,13 +42,13 @@ public class WalletService {
 
     public void debitBrl(Wallet wallet, BigDecimal amount) {
         if (wallet.getBalanceBrl().compareTo(amount) < 0) {
-            throw new BusinessException("Insufficient balance");
+            throw new InsufficientBalanceException("Insufficient balance");
         }
         wallet.setBalanceBrl(wallet.getBalanceBrl().subtract(amount));
     }
 
     public void creditUsd(Wallet wallet, BigDecimal amount) {
-        wallet.setBalanceBrl(wallet.getBalanceBrl().add(amount));
+        wallet.setBalanceUsd(wallet.getBalanceUsd().add(amount));
     }
 
     public Wallet findWallet(Long userId) {

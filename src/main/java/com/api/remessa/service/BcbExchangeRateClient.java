@@ -2,7 +2,7 @@ package com.api.remessa.service;
 
 import com.api.remessa.dto.response.ExchangeRateApiResponse;
 import com.api.remessa.dto.response.ExchangeRateData;
-import com.api.remessa.exception.BusinessException;
+import com.api.remessa.exception.ResourceNotFoundException;
 import com.api.remessa.model.ExchangeRate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class BcbExchangeRateClient {
                 .body(ExchangeRateApiResponse.class);
 
         if (response == null || response.value().isEmpty()) {
-            throw new BusinessException("No exchange rate found for " + formattedDate);
+            throw new ResourceNotFoundException("No exchange rate found for " + formattedDate);
         }
 
         ExchangeRateData data = response.value().getFirst();

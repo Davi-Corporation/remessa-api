@@ -2,7 +2,7 @@ package com.api.remessa.service;
 
 import com.api.remessa.dto.request.CreateTransferRequest;
 import com.api.remessa.dto.response.TransferResponse;
-import com.api.remessa.exception.BusinessException;
+import com.api.remessa.exception.DuplicateResourceException;
 import com.api.remessa.model.ExchangeRate;
 import com.api.remessa.model.Transfer;
 import com.api.remessa.model.User;
@@ -31,7 +31,7 @@ public class TransferService {
         User receiver = userService.findById(request.receiverId());
 
         if (sender.getId().equals(receiver.getId())) {
-            throw new BusinessException("Sender and receiver cannot be the same");
+            throw new DuplicateResourceException("Sender and receiver cannot be the same");
         }
 
         Wallet senderWallet = walletService.findWallet(sender.getId());

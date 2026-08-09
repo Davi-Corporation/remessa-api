@@ -3,7 +3,7 @@ package com.api.remessa.service;
 import com.api.remessa.dto.request.CreateUserRequest;
 import com.api.remessa.dto.response.UserResponse;
 import com.api.remessa.exception.DuplicateResourceException;
-import com.api.remessa.exception.ResourceNotFoundException;
+import com.api.remessa.exception.UserNotFoundException;
 import com.api.remessa.model.User;
 import com.api.remessa.model.Wallet;
 import com.api.remessa.persistence.UserRepository;
@@ -59,6 +59,6 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 }
