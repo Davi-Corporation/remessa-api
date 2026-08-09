@@ -207,3 +207,8 @@ Content-Type: application/json
 ```
 
 A cotação utilizada na transferência é obtida pelo sistema e o valor correspondente em USD é calculado automaticamente.
+
+### IMPORTANTE
+```
+Arquivo 'Remessa.postman_collection.json' disponível para importação no Postman e manipulação dos endpoints.
+```
